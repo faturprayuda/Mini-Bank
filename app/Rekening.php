@@ -11,7 +11,7 @@ class Rekening extends Model
     // relasi one to one ke user
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function transaksi()

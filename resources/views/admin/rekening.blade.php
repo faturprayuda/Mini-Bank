@@ -1,10 +1,10 @@
 @extends('admin.layouts.layoutAdmin')
 
 {{-- title bar --}}
-@section('title', 'Halaman Customer')
+@section('title', 'Halaman Rekening Customer')
 
 {{-- main title --}}
-@section('main title', 'Data Customer')
+@section('main title', 'Data Rekening Customer')
 
 @section('content')
 <div class="container-fluid">
@@ -19,8 +19,8 @@
             </div>
             <div class="col-3">
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah-data">
-                <i class="fas fa-user-plus"></i> Tambah Customer
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah-rek">
+                <i class="fas fa-plus"></i> Buat Rekening Customer
               </button>
             </div>
           </div>
@@ -32,23 +32,22 @@
               <tr>
                 <th>No.</th>
                 <th>Nama Customer</th>
-                <th>Email</th>
-                <th>Alamat</th>
-                <th>No Telepon</th>
+                <th>No. Rekening</th>
+                <th>PIN</th>
+                <th>Saldo</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($user as $userdata)
+              @foreach($rekening as $rk)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $userdata->name }}</td>
-                <td>{{ $userdata->email }}</td>
-                <td>{{ $userdata->address }}</td>
-                <td>{{ $userdata->no_phone }}</td>
-                <td><a href="customer/edit/{{ $userdata->id }}" class="badge badge-success"
-                    style="color: white">Ubah</a> |
-                  <a href="customer/hapus/{{ $userdata->id }}" class="badge badge-danger">Hapus</a>
+                <td>{{ $rk->user->name }}</td>
+                <td>{{ $rk->no_rekening }}</td>
+                <td>{{ $rk->pin }}</td>
+                <td>Rp. {{ $rk->saldo }}</td>
+                <td><a href="customer/edit/{{ $rk->id }}" class="badge badge-success" style="color: white">Ubah</a> |
+                  <a href="customer/hapus/{{ $rk->id }}" class="badge badge-danger">Hapus</a>
                 </td>
               </tr>
               @endforeach
@@ -57,9 +56,9 @@
               <tr>
                 <th>No.</th>
                 <th>Nama Customer</th>
-                <th>Email</th>
-                <th>Alamat</th>
-                <th>No Telepon</th>
+                <th>No. Rekening</th>
+                <th>PIN</th>
+                <th>Saldo</th>
                 <th>Aksi</th>
               </tr>
             </tfoot>
@@ -73,7 +72,7 @@
     <!-- /.row -->
 
     {{-- modal tambah user --}}
-    <div class="modal fade" id="tambah-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="tambah-rek" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -91,13 +90,18 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="{{ route('tambah.data')}}">
+              <form role="form" method="POST" action="{{ route('tambah.rekening')}}">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label for="name">Nama Customer</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                      placeholder="Nama Customer" name="name" value="{{ old('name') }}" required>
+                    <select class="form-control @error('name') is-invalid @enderror" id="name"
+                      placeholder="Nama Customer" name="name">
+                      <option value="">--Pilih Nasabah--</option>
+                      @foreach ($user as $rk)
+                      <option value="{{ $rk->name }}" name="nama_nasabah">{{ $rk->name }}</option>
+                      @endforeach
+                    </select>
 
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -107,11 +111,11 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="email">Email Customer</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                      placeholder="Email Customer" name="email" value="{{ old('email') }}" required>
+                    <label for="rekening">No. Rekening</label>
+                    <input type="text" class="form-control @error('rekening') is-invalid @enderror" id="rekening"
+                      placeholder="No. Rekening" name="rekening" value="{{ old('rekening') }}" required>
 
-                    @error('email')
+                    @error('rekening')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -119,11 +123,11 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="address">Alamat Customer</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                      placeholder="Alamat Customer" name="address" value="{{ old('address') }}" required>
+                    <label for="pin">PIN Customer</label>
+                    <input type="text" class="form-control @error('pin') is-invalid @enderror" id="pin"
+                      placeholder="PIN Customer" name="pin" value="{{ old('pin') }}" required>
 
-                    @error('address')
+                    @error('pin')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -131,35 +135,15 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="phone">No. Telepon Customer</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
-                      placeholder="No. Telepon Customer" name="phone" value="{{ old('phone') }}" required>
+                    <label for="saldo">Saldo Customer</label>
+                    <input type="text" class="form-control @error('saldo') is-invalid @enderror" id="saldo"
+                      placeholder="Saldo Customer" name="saldo" value="{{ old('saldo') }}" required>
 
-                    @error('phone')
+                    @error('saldo')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                      placeholder="Password" name="password" value="{{ old('password') }}" required
-                      autocomplete="new-password">
-
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-
-                  <div class="form-group">
-                    <label for="password-confirm">Confirm Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                      id="password-confirm" placeholder="Confirm Password" name="password_confirmation"
-                      value="{{ old('password') }}" required autocomplete="new-password">
                   </div>
                 </div>
                 <!-- /.card-body -->

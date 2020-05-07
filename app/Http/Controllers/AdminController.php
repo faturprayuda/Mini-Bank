@@ -36,25 +36,37 @@ class AdminController extends Controller
     }
 
     // edit data customer
-    // edit data
-    public function edit($id)
+    public function EditCustomer($id)
     {
         $user = User::find($id);
-
-        return view('admin.edit', ['user' => $user]);
+        return view('admin.ubahCustomer', ['user' => $user]);
     }
 
-    public function update($id, Request $request)
+    public function updateCustomer($id, Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
-            'alamat' => 'required'
+            'name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $pegawai = User::find($id);
-        $pegawai->nama = $request->nama;
-        $pegawai->alamat = $request->alamat;
-        $pegawai->save();
-        return redirect('/pegawai');
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->no_phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect('/admin/customer');
+    }
+
+    public function hapusCustomer($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/admin/customer');
     }
 }

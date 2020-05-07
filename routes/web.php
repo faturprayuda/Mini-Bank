@@ -13,9 +13,9 @@
 
 use App\Http\Controllers\RekeningController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // Route::get('/cekdata', 'RekeningController@index');
@@ -42,13 +42,21 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Route Edit data
     Route::get('/customer/edit/{id}', 'AdminController@EditCustomer')->name('ubah.customer');
-    Route::get('/customer/update/{id}', 'AdminController@updateCustomer')->name('ubah.customer.proses');
+
+    // Route Delete Data
+    Route::get('/customer/hapus/{id}', 'AdminController@hapusCustomer');
 
 
-
+    // route Rekening
     Route::get('/rekening', 'RekeningController@index')->name('rekening');
+
+    // tambah data rekening
+    Route::post('/rekening/tambah', 'RekeningController@create')->name('tambah.rekening');
+
     Route::get('/transaksi', 'TransaksiController@index')->name('transaksi');
 });
+
+Route::put('/customer/update/{id}', 'AdminController@updateCustomer');
 
 
 // test URI

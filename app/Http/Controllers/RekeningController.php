@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rekening;
+use App\User;
 use Illuminate\Http\Request;
 
 class RekeningController extends Controller
@@ -15,7 +16,11 @@ class RekeningController extends Controller
     public function index()
     {
         $rekening = Rekening::all();
-        return view('tes.user', ['rekening' => $rekening]);
+        $user = User::all();
+        return view('admin.rekening', [
+            'rekening' => $rekening,
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -23,9 +28,31 @@ class RekeningController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'rekening' => 'required',
+            'pin' => 'min:6|required',
+            'saldo' => 'required',
+        ]);
+
+        $name = $request->name;
+        if (User::findId($name)) {
+            $user = User::findId($name);
+            $id = $user->id;
+        } else {
+            return redirect()->back();
+        }
+
+        Rekening::create([
+            'user_id' => $id,
+            'no_rekening' => $request->rekening,
+            'pin' => $request->pin,
+            'saldo' => $request->saldo,
+        ]);
+
+        return redirect('/admin/rekening');
     }
 
     /**
