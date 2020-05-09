@@ -46,8 +46,9 @@
                 <td>{{ $rk->no_rekening }}</td>
                 <td>{{ $rk->pin }}</td>
                 <td>Rp. {{ $rk->saldo }}</td>
-                <td><a href="customer/edit/{{ $rk->id }}" class="badge badge-success" style="color: white">Ubah</a> |
-                  <a href="customer/hapus/{{ $rk->id }}" class="badge badge-danger">Hapus</a>
+                <td>
+                  <a href="rekening/edit/{{ $rk->id }}" class="badge badge-success" style="color: white">Ubah</a> |
+                  <a href="rekening/hapus/{{ $rk->id }}" class="badge badge-danger">Hapus</a>
                 </td>
               </tr>
               @endforeach

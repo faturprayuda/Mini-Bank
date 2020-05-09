@@ -25,6 +25,24 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::group(['prefix' => 'admin'], function () {
 
     // route auth admin
@@ -46,17 +64,29 @@ Route::group(['prefix' => 'admin'], function () {
     // Route Delete Data
     Route::get('/customer/hapus/{id}', 'AdminController@hapusCustomer');
 
-
     // route Rekening
     Route::get('/rekening', 'RekeningController@index')->name('rekening');
 
     // tambah data rekening
     Route::post('/rekening/tambah', 'RekeningController@create')->name('tambah.rekening');
 
+    // Route Edit data rekening
+    Route::get('/rekening/edit/{id}', 'RekeningController@edit')->name('ubah.customer');
+
+    // Route Delete Data Rekening
+    Route::get('/rekening/hapus/{id}', 'RekeningController@destroy');
+
+
+
+
     Route::get('/transaksi', 'TransaksiController@index')->name('transaksi');
 });
 
+// proses ubah data customer
 Route::put('/customer/update/{id}', 'AdminController@updateCustomer');
+
+// proses ubah data rekening
+Route::put('/rekening/update/{id}', 'RekeningController@update');
 
 
 // test URI

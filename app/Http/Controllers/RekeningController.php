@@ -17,7 +17,7 @@ class RekeningController extends Controller
     {
         $rekening = Rekening::all();
         $user = User::all();
-        return view('admin.rekening', [
+        return view('admin.rekening.rekening', [
             'rekening' => $rekening,
             'user' => $user,
         ]);
@@ -72,9 +72,9 @@ class RekeningController extends Controller
      * @param  \App\Rekening  $rekening
      * @return \Illuminate\Http\Response
      */
-    public function show(Rekening $rekening)
+    public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -83,9 +83,10 @@ class RekeningController extends Controller
      * @param  \App\Rekening  $rekening
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rekening $rekening)
+    public function edit($id)
     {
-        //
+        $rekening = Rekening::find($id);
+        return view('admin.rekening.ubahRekening', ['rekening' => $rekening]);
     }
 
     /**
@@ -95,9 +96,19 @@ class RekeningController extends Controller
      * @param  \App\Rekening  $rekening
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rekening $rekening)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'pin' => 'min:6|required',
+            'saldo' => 'required',
+        ]);
+
+
+        $rekening = Rekening::find($id);
+        $rekening->pin = $request->pin;
+        $rekening->saldo = $request->saldo;
+        $rekening->save();
+        return redirect('/admin/rekening');
     }
 
     /**
@@ -106,8 +117,11 @@ class RekeningController extends Controller
      * @param  \App\Rekening  $rekening
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rekening $rekening)
+    public function destroy($id)
     {
-        //
+        $user = Rekening::find($id);
+        $user->delete();
+
+        return redirect('/admin/rekening');
     }
 }
