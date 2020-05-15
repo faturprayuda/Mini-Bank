@@ -25,7 +25,19 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');
 
+Route::group(['prefix' => 'user'], function () {
+    // info customer
+    Route::get('info', 'UserController@info')->name('customer.info');
+    // transfer
+    Route::get('transfer', 'UserController@transfer')->name('customer.transfer');
+    Route::post('transfer/cek', 'UserController@cekTransfer')->name('transfer.saldo');
 
+    // tarik tunai
+    Route::get('tarik', 'UserController@tarik')->name('customer.tarik');
+    Route::post('tarik', 'UserController@prosesTarik')->name('tarik.saldo');
+});
+
+Route::post('transfer/proses', 'UserController@prosesTransfer')->name('transfer.proses');
 
 
 

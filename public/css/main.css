@@ -1,0 +1,26 @@
+/** dashboard customer */
+
+.menu-icon {
+    margin-left: 70px;
+}
+
+.info-icon {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.info-icon:hover {
+    color: blue;
+}
+
+/* *user Info */
+.saldo {
+    margin: 20px 0 20px 30%;
+}
+
+.uang {
+    margin-left: -15px;
+    font-size: 50px;
+}

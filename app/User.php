@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'no_phone'
+        'name', 'email', 'password', 'address', 'no_phone', 'remember_token'
     ];
 
     /**
@@ -27,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->hasOne('App\Rekening');
     }
 
-    // mencari nama
+    // mencari id dari nama
     public static function findId($name)
     {
         return static::select('id')->where('name', $name)->first();

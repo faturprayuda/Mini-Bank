@@ -19,6 +19,8 @@ class CreateTransaksisTable extends Migration
             $table->string('no_transaksi');
             $table->date('date_transaksi');
             $table->string('total_transaksi');
+            $table->string('action');
+            $table->string('tujuan_tf')->nullable();
             $table->timestamps();
 
             $table->foreign('id_rekening')->references('id')->on('rekenings')->onDelete('cascade');

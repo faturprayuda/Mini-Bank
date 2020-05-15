@@ -72,6 +72,7 @@ class RegisterController extends Controller
             'no_phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'remember_token' => bcrypt($data['email']),
         ]);
     }
 }

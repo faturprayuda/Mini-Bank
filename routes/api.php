@@ -17,4 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('customers', 'AdminController@customerAPI');
+// Api TES
+// cek data
+Route::get('customers', 'APIController@customerAPI');
+
+// Register auth
+Route::post('auth/register', 'APIController@register');
+
+// login
+Route::post('auth/login', 'APIController@login');
+// END Api Tes

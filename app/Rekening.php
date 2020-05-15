@@ -13,6 +13,9 @@ class Rekening extends Model
 
 
     protected $guarded = [];
+    protected $fillable = [
+        'saldo',
+    ];
 
     // relasi one to one ke user
     public function user()
@@ -23,5 +26,11 @@ class Rekening extends Model
     public function transaksi()
     {
         return $this->hasMany('App\Transaksi', 'id_rekening', 'id');
+    }
+
+    // mencari id dari norek
+    public static function findId($norek)
+    {
+        return static::select('id')->where('no_rekening', $norek)->first();
     }
 }
