@@ -36,12 +36,32 @@
 
                             <div class="col-lg-4">
                                 <div class="tarik-tunai">
-                                    <a href="{{ route('customer.tarik') }}">
+                                    <a href="{{ route('tarik.tunai') }}">
                                         <i class="info-icon fas fa-hand-holding-usd fa-5x"></i>
                                         <p>Tarik Tunai</p>
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row menu-icon">
+                            <div class="col-lg-4">
+                                <div class="tarik-tunai">
+                                    <a href="{{ route('setor.tunai') }}">
+                                        <i class="info-icon fas fa-hand-holding-usd fa-5x"></i>
+                                        <p>Setor Tunai</p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="transfer">
+                                    <a href="#">
+                                        <i class="info-icon fas fa-exchange-alt fa-5x"></i>
+                                        <p>Transfer Virtual Accout</p>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

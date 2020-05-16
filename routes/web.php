@@ -33,8 +33,14 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('transfer/cek', 'UserController@cekTransfer')->name('transfer.saldo');
 
     // tarik tunai
-    Route::get('tarik', 'UserController@tarik')->name('customer.tarik');
+    Route::get('tarik', 'UserController@tarik')->name('tarik.tunai');
     Route::post('tarik', 'UserController@prosesTarik')->name('tarik.saldo');
+
+    // setor tunai
+    Route::get('setor', 'UserController@setor')->name('setor.tunai');
+    Route::post('setor', 'UserController@prosesSetor')->name('setor.saldo');
+
+    // transaksi
 });
 
 Route::post('transfer/proses', 'UserController@prosesTransfer')->name('transfer.proses');

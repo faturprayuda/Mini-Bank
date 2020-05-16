@@ -13,9 +13,6 @@ class Rekening extends Model
 
 
     protected $guarded = [];
-    protected $fillable = [
-        'saldo',
-    ];
 
     // relasi one to one ke user
     public function user()

@@ -30,6 +30,8 @@
                 <th>No. Transaksi</th>
                 <th>Tanggal Transaksi</th>
                 <th>Total Transaksi</th>
+                <th>Kegiatan</th>
+                <th>Tujuan Transfer</th>
               </tr>
             </thead>
             <tbody>
@@ -41,9 +43,13 @@
                 <td>{{ $userdata->no_transaksi }}</td>
                 <td>{{ $userdata->date_transaksi}}</td>
                 <td>{{ $userdata->total_transaksi }}</td>
-                <td><a href="customer/edit/{{ $userdata->id }}" class="badge badge-success"
-                    style="color: white">Ubah</a> |
-                  <a href="customer/hapus/{{ $userdata->id }}" class="badge badge-danger">Hapus</a>
+                <td>{{ $userdata->action }}</td>
+                <td>
+                  @if ($userdata->tujuan_tf == NULL)
+                  -
+                  @else
+                  {{ $userdata->tujuan_tf }}
+                  @endif
                 </td>
               </tr>
               @endforeach
@@ -56,6 +62,8 @@
                 <th>No. Transaksi</th>
                 <th>Tanggal Transaksi</th>
                 <th>Total Transaksi</th>
+                <th>Kegiatan</th>
+                <th>Tujuan Transfer</th>
               </tr>
             </tfoot>
           </table>
