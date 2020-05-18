@@ -10,6 +10,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+    <!-- My Styles -->
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
     <!-- Styles -->
     <style>
         html,
@@ -78,7 +81,9 @@
         </div>
         @endif
 
-        <div class="content">
+        <img src="https://www.cohf.org/files/2019-06-07_18_19_42_bank-jwmnk9j9ciaa.jpg" class="gambar-bank">
+
+        <div class="content text-db">
             <div class="title m-b-md">
                 Bank Protected
             </div>
