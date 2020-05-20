@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Transaksi;
+use App\AkunVirtual;
 use App\Transformers\UserTransformer;
+use App\Transformers\VaTransformer;
 use Auth;
 
 class APIController extends Controller
@@ -67,5 +70,38 @@ class APIController extends Controller
                 'token' => $user->remember_token
             ])
             ->toArray();
+    }
+
+
+    // controller transaksi
+
+    public function cekTransaksi(Transaksi $transaksi)
+    {
+        $transaksis = $transaksi->all();
+        return response()->json($transaksis);
+    }
+
+    public function tagihanTransaksi(Request $request, AkunVirtual $va)
+    {
+
+        $this->validate($request, [
+            'nama_user'          => ['required'],
+            'no_va'             => ['required'],
+            'total_pembayaran'  => ['required']
+        ]);
+
+        $va = $va->create([
+            'nama_user'         => $request->nama_user,
+            'no_va'             => $request->no_va,
+            'total_pembayaran'  => $request->total_pembayaran,
+            'status'            => 'Belum Lunas',
+        ]);
+
+        $response = fractal()
+            ->item($va)
+            ->transformWith(new VaTransformer)
+            ->toArray();
+
+        return response()->json($response, 201);
     }
 }

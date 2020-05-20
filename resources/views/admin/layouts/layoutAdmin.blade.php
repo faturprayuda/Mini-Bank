@@ -103,6 +103,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href=" {{ route('transaksi.va') }} " class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Transaksi Virtual Account
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href=" {{ route('admin.logout') }} " class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>

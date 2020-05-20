@@ -41,9 +41,13 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('setor', 'UserController@prosesSetor')->name('setor.saldo');
 
     // transaksi
+    Route::get('va', 'TransaksiController@transfer')->name('transfer.va');
+    Route::post('va/cek', 'TransaksiController@cekTransfer')->name('transfer.cek.va');
 });
 
 Route::post('transfer/proses', 'UserController@prosesTransfer')->name('transfer.proses');
+
+Route::post('va/proses', 'TransaksiController@prosesTransfer')->name('transfer.proses.va');
 
 
 
@@ -94,10 +98,11 @@ Route::group(['prefix' => 'admin'], function () {
     // Route Delete Data Rekening
     Route::get('/rekening/hapus/{id}', 'RekeningController@destroy');
 
-
-
-
+    // route transaksi
     Route::get('/transaksi', 'TransaksiController@index')->name('transaksi');
+
+    // route transaksi va
+    Route::get('/transaksi/va', 'TransaksiController@infoVa')->name('transaksi.va');
 });
 
 // proses ubah data customer

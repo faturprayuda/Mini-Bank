@@ -26,4 +26,8 @@ Route::post('auth/register', 'APIController@register');
 
 // login
 Route::post('auth/login', 'APIController@login');
+
+Route::get('customers/transaksi', 'APIController@cekTransaksi');
+
+Route::post('customers/transaksi/bill', 'APIController@tagihanTransaksi');
 // END Api Tes

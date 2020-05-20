@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Rekening');
     }
 
+    public function akunvirtual()
+    {
+        return $this->hasOne('App\AkunVirtual');
+    }
+
     // mencari id dari nama
     public static function findId($name)
     {

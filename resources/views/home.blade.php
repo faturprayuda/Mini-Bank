@@ -54,8 +54,8 @@
                             </div>
 
                             <div class="col-lg-4">
-                                <div class="transfer">
-                                    <a href="#">
+                                <div class="transfer virtual account">
+                                    <a href="{{ route('transfer.va') }}">
                                         <i class="info-icon fas fa-exchange-alt fa-5x"></i>
                                         <p>Transfer Virtual Accout</p>
                                     </a>

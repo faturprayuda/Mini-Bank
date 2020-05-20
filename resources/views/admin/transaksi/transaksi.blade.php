@@ -29,6 +29,7 @@
                 <th>No. Rekening Customer</th>
                 <th>No. Transaksi</th>
                 <th>Tanggal Transaksi</th>
+                <th>Status</th>
                 <th>Total Transaksi</th>
                 <th>Kegiatan</th>
                 <th>Tujuan Transfer</th>
@@ -42,6 +43,13 @@
                 <td>{{ $userdata->rekening->no_rekening }}</td>
                 <td>{{ $userdata->no_transaksi }}</td>
                 <td>{{ $userdata->date_transaksi}}</td>
+                <td>
+                  @if ($userdata->status == NULL)
+                  -
+                  @else
+                  {{ $userdata->status }}
+                  @endif
+                </td>
                 <td>{{ $userdata->total_transaksi }}</td>
                 <td>{{ $userdata->action }}</td>
                 <td>
@@ -61,6 +69,7 @@
                 <th>No. Rekening Customer</th>
                 <th>No. Transaksi</th>
                 <th>Tanggal Transaksi</th>
+                <th>Status</th>
                 <th>Total Transaksi</th>
                 <th>Kegiatan</th>
                 <th>Tujuan Transfer</th>
